@@ -1,0 +1,20 @@
+function [ac] = init_ac(env_var)
+    ac.mass = 100000;       % kg
+    ac.S = 268;             % m^2
+    ac.I_y = 6.78e6;        % kg*m^2
+    ac.l_mue = 6.39;        % m
+    ac.F_TBPmax = 320800;   % N
+    ac.n_p = 0.7;           
+    ac.n_v = 0;             
+    ac.rho_TBP = env_var.rho_0;
+    ac.C_A_alpha0eta0 = 0.239;
+    ac.C_Aalpha = 4.6;
+    ac.C_Aeta = 0.189;
+    ac.C_W0 = 0.015;
+    ac.k = 0.04;
+    ac.C_m_alpha0eta0 = 0.07;
+    ac.C_malpha = -0.824;
+    ac.C_meta = -0.638;
+    ac.C_mq = -3.0;
+    ac.C_madot = -1.0;
+end

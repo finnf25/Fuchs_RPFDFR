@@ -6,5 +6,8 @@ clear
 
 
 %Initial Values
-altitude_ft = 32000;
-velocity_kn = 450;
+altitude_ft = 30000;
+velocity_kn = 275;
+
+enviroment = init_env;
+aircraft = init_ac(enviroment);
