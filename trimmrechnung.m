@@ -14,6 +14,7 @@ function [trim_results] = trimmrechnung(ac,env,altitude_ft,V_IASref,alpha_refINI
     %trim init
     alpha_ref = alpha_refINIT;
     rho_ref = rho;
+    
     %does not change, so use as initial value
     C_Aref = (2*ac.mass*env.g)/(rho_ref*power(velocity_ms,2)*ac.S); % const
 

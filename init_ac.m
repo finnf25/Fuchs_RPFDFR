@@ -1,7 +1,7 @@
 function [ac] = init_ac(env_var)
     ac.mass = 100000;       % kg
     ac.S = 268;             % m^2
-    ac.I_y = 6.78e6;        % kg*m^2
+    ac.I_y = 6.87e6;        % kg*m^2
     ac.l_mue = 6.39;        % m
     ac.F_TBPmax = 320800;   % N
     ac.n_p = 0.7;           
