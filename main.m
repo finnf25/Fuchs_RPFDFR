@@ -13,3 +13,4 @@ enviroment = init_env;
 aircraft = init_ac(enviroment);
 
 trim = trimmrechnung(aircraft,enviroment,altitude_ft,velocity_kn,0);
+eg = ersatzgroessen(aircraft,trim);
