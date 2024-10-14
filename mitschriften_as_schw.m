@@ -13,7 +13,7 @@ function [as_res] = mitschriften_as_schw(eg)
 
     as_res.eig = eig(as_res.A)
     disp(as_res.eig)
-    as_res.statespace = ss(as_res.A, as_res.B, as_res.C, as_res.D, "outputname", ["q_dot", "alpha_dot"], "InputName", ["eta", "delta"]);
+    as_res.statespace = ss(as_res.A_mat, as_res.B_mat, as_res.C_mat, as_res.D_mat, "outputname", ["q_dot", "alpha_dot"], "InputName", ["eta", "delta"]);
     as_res.transferfkt = tf(as_res.statespace);
 
     pzmap(as_res.statespace); %erzeug poldiagramm

@@ -14,3 +14,9 @@ aircraft = init_ac(enviroment);
 
 trim = trimmrechnung(aircraft,enviroment,altitude_ft,velocity_kn,0);
 eg = ersatzgroessen(aircraft,trim);
+
+a_sw = alphaschwingung(eg);
+b_sw = bahnschwingung(eg,enviroment);
+sw4x4 = laengsbewegung4x4(eg, enviroment)
+
+val = sw4x4.transferfunction(1,1)
