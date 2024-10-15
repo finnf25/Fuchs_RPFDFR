@@ -16,5 +16,5 @@ function [ersatzgr] = ersatzgroessen(ac,trim)
     ersatzgr.M_q = ((trim.q_dash*ac.S*ac.l_mue) / ac.I_y) * (ac.l_mue/trim.vel_ms) * (ac.C_mq + ac.C_madot);
     ersatzgr.M_alpha = ((trim.q_dash*ac.S*ac.l_mue) / ac.I_y) * (ac.C_malpha + ersatzgr.Z_alpha*(ac.l_mue/trim.vel_ms)*ac.C_madot);
     ersatzgr.M_eta = ((trim.q_dash*ac.S*ac.l_mue) / ac.I_y) * (ac.C_meta + ersatzgr.Z_eta*(ac.l_mue/trim.vel_ms)*ac.C_madot);
-    ersatzgr.M_delta = ersatzgr.Z_delta * ((trim.q_dash*ac.S*ac.l_mue) / ac.I_y) * (ac.l_mue/trim.vel_ms) * ac.C_madot
+    ersatzgr.M_delta = ersatzgr.Z_delta * ((trim.q_dash*ac.S*ac.l_mue) / ac.I_y) * (ac.l_mue/trim.vel_ms) * ac.C_madot;
 end

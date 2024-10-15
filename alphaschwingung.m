@@ -7,7 +7,7 @@ function [alpha_schw] = alphaschwingung(eg)
 
     alpha_schw.A_mat = [eg.M_q eg.M_alpha; 1 eg.Z_alpha];
     alpha_schw.B_mat = [eg.M_eta eg.M_delta; eg.Z_eta eg.Z_delta];
-    alpha_schw.C_mat = [1 0; 0 1];
+    alpha_schw.C_mat = eye(2);
     alpha_schw.D_mat = [0 0; 0 0];
     
     alpha_schw.eigenwerte = eig(alpha_schw.A_mat);

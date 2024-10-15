@@ -3,6 +3,7 @@
 
 %Setup
 clear
+close all
 format long
 
 %Initial Values
@@ -17,6 +18,6 @@ eg = ersatzgroessen(aircraft,trim);
 
 a_sw = alphaschwingung(eg);
 b_sw = bahnschwingung(eg,enviroment);
-sw4x4 = laengsbewegung4x4(eg, enviroment)
+sw4x4 = laengsbewegung4x4(eg, enviroment);
 
-val = sw4x4.transferfunction(2,1)
+val = sw4x4.transferfunction(1,1)

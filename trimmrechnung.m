@@ -44,6 +44,6 @@ function [trim_results] = trimmrechnung(ac,env,altitude_ft,V_IASref,alpha_refINI
     trim_results.W = W_ref;
     trim_results.A = A_ref;
     trim_results.F = F_ref;
-    trim_results.delta = delta_ref
+    trim_results.delta = delta_ref;
 
 end
