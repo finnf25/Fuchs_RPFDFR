@@ -6,4 +6,8 @@ function [res] = laengsbewegung4x4(eg, env)
     res.eigenwerte = eig(res.A_mat);
     res.statespace = ss(res.A_mat, res.B_mat, res.C_mat, res.D_mat, "outputname", ["V_dot", "gamma_dot", "q_dot", "alpha_dot"], "InputName", ["eta", "delta"]);
     res.transferfunction = tf(res.statespace);
+
+    pzmap(res.statespace);
+    rlocus(res.transferfunction(1,1));
+
 end
