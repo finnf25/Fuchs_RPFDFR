@@ -13,5 +13,10 @@ function [alpha_schw] = alphaschwingung(eg)
     alpha_schw.eigenwerte = eig(alpha_schw.A_mat);
 
     alpha_schw.statespace = ss(alpha_schw.A_mat, alpha_schw.B_mat, alpha_schw.C_mat, alpha_schw.D_mat, "outputname", ["q_dot", "alpha_dot"], "InputName", ["eta", "delta"]);
-    alpha_schw.transferfunction = tf(alpha_schw.statespace)
+    alpha_schw.transferfunction = tf(alpha_schw.statespace);
+
+    alpha_schw.tf_q_eta = alpha_schw.transferfunction(1,1);
+    alpha_schw.tf_alpha_eta = alpha_schw.transferfunction(2,1);
+    alpha_schw.tf_q_delta = alpha_schw.transferfunction(1,2);
+    alpha_schw.tf_alpha_delta = alpha_schw.transferfunction(2,2);
 end
