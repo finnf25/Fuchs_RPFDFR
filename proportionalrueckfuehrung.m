@@ -21,12 +21,15 @@ function [p_control] = proportionalrueckfuehrung(schwingung, tf_i1, tf_i2, D_tar
 
    
     G = (p_control.numerator) / (p_control.denominator + k * p_control.numerator);
-    [z_geschlossen, n_geschlossen] = numden(G);
+    [~, n_geschlossen] = numden(G);
 
     %extract coeffs denominator
     all_coeffs = coeffs(collect(n_geschlossen,s),s);
 
     %calc params
+    disp(all_coeffs(1)) % s0
+    disp(all_coeffs(3)) % s2
+    disp(all_coeffs(2)) % s1
     omega_0 = sqrt(all_coeffs(1)/all_coeffs(3))
     sigma = -(all_coeffs(2)/(2*all_coeffs(3)))
     damping = -sigma/omega_0

@@ -3,8 +3,10 @@
 
 %Setup
 clear
-close all
+%close all
 format long
+
+plots = false;
 
 %Initial Values
 altitude_ft = 30000;
@@ -20,15 +22,19 @@ a_sw = alphaschwingung(eg);
 b_sw = bahnschwingung(eg,enviroment);
 sw4x4 = laengsbewegung4x4(eg, enviroment);
 
-val = sw4x4.tf_q_eta
 
-%plots for pole-zero-map and WOK
-figure()
-pzmap(sw4x4.statespace);
-axis equal
-figure()
-rlocus(-val);
-sgrid(1/sqrt(2),3)
-axis equal
+%%plots for pole-zero-map and WOK
+if plots==true
+    figure()
+    pzmap(sw4x4.statespace);
+    axis equal
+    figure()
+    disp(sw4x4.tf_q_eta)
+    rlocus(-sw4x4.tf_q_eta);
+    sgrid(1/sqrt(2),3)
+    axis equal
+end
 
-val2 = proportionalrueckfuehrung(a_sw,1,1,2/sqrt(2));
+%alpha_sw_p_control = proportionalrueckfuehrung(a_sw,1,1,1/sqrt(2));
+
+k_filter(a_sw,1,1, 1/sqrt(2), 3, 1);
