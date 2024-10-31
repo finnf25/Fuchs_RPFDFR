@@ -3,7 +3,7 @@
 
 %Setup
 clear
-%close all
+close all
 format long
 
 plots = false;
