@@ -1,12 +1,16 @@
-function [trim_results] = trimmrechnung(ac,env,altitude_ft,V_IASref,alpha_refINIT)
+function [trim_results] = trimmrechnung(ac,env,altitude_ft,V_xx_ref,alpha_refINIT, ias)
     %alt from ft to m
     altitude_m = 0.30479 * altitude_ft;
 
     %get rho of alt
     rho = densityofaltitude(env,altitude_m);
 
-    %calc TAS
-    velocity_ms = sqrt(env.rho_0/rho)*(1852/3600) * V_IASref;
+    %calc vel in m/s
+    if ias==false   %tas is given
+        velocity_ms = (1852/3600) * V_xx_ref;
+    else            %ias is given
+        velocity_ms = sqrt(env.rho_0/rho)*(1852/3600) * V_xx_ref;
+    end
 
     %qdash
     q_dash = (rho/2)*power(velocity_ms,2);
