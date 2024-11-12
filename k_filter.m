@@ -21,13 +21,12 @@ function [lag] = k_filter(sw_form,p_1,p_2, D_target, omega_0_target)
     phase_should_be_2np1pi = sum(phase_nst) + phi_c - sum(phase_pole) - phase_lag_pole;
 
     %iteration um phase = (2n + 1)*pi
-    lag.possible_nst_angles = 0;
+    lag.possible_nst_angles = [];
     for i=-10:10
         lag.possible_nst_angles(length(lag.possible_nst_angles) + 1) = double(solve(phase_should_be_2np1pi==((2*i+1)*pi),phi_c));
     end
 
     %suche kleinsten winkel der NST
-    lag.possible_nst_angles(lag.possible_nst_angles==0) = [];
     lag.nst_angle = min(abs(lag.possible_nst_angles));
 
     %rekonstruieren der gesamten NST
@@ -61,12 +60,12 @@ function [lag] = k_filter(sw_form,p_1,p_2, D_target, omega_0_target)
     lag.k = (prod(d_abs.pole)/prod(d_abs.nst))*(1/offen.k)
 
     %tf extrahieren und plotten
-    lag.transferfunction = zpk(geschl.nst,geschl.pole,lag.k);
+        %lag.transferfunction = zpk(geschl.nst,geschl.pole,lag.k);
 
-    tf = lag.transferfunction
+        %tf = lag.transferfunction
 
-    rlocus(-lag.transferfunction)
-    sgrid(D_target,omega_0_target)
+        %rlocus(-lag.transferfunction)
+        %sgrid(D_target,omega_0_target)
     
     
 end

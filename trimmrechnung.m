@@ -3,7 +3,7 @@ function [trim_results] = trimmrechnung(ac,env,altitude_ft,V_xx_ref,alpha_refINI
     altitude_m = 0.30479 * altitude_ft;
 
     %get rho of alt
-    rho = densityofaltitude(env,altitude_m);
+    rho = env.rho_0 * power((1+ (env.y_H/env.T_0)*altitude_m),(-(env.g/(env.R*env.y_H))-1));
 
     %calc vel in m/s
     if ias==false   %tas is given
@@ -37,7 +37,7 @@ function [trim_results] = trimmrechnung(ac,env,altitude_ft,V_xx_ref,alpha_refINI
     end
 
     %reformat
-    trim_results.alt_m = altitude_m;
+    trim_results.altitude_m = altitude_m;
     trim_results.rho_H = rho;
     trim_results.vel_ms = velocity_ms;
     trim_results.q_dash = q_dash;
