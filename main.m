@@ -9,8 +9,8 @@ format long
 plots = false;
 
 %% Initial Values
-altitude_array = 25000:1000:35000;
-velocity_tas_array = 400:10:500;
+altitude_array = 30000:1000:30000;
+velocity_tas_array = 450:10:450;
 
 %output matrix for output parameter to be plotted over whole range of
 %vel/alt
