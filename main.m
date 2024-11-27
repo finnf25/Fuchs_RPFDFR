@@ -9,12 +9,13 @@ format long
 plots = false;
 
 %% Initial Values
-altitude_array = 30000:1000:30000;
-velocity_tas_array = 450:10:450;
+altitude_array = 15000:1000:45000;
+velocity_tas_array = 300:10:600;
 
 %output matrix for output parameter to be plotted over whole range of
 %vel/alt
 lag_k_out_mat = zeros(length(velocity_tas_array),length(altitude_array));
+lag_mat_nst = zeros(length(velocity_tas_array),length(altitude_array));
 
 %iteration over all velocities
 for vel_id=1:length(velocity_tas_array)
@@ -42,6 +43,7 @@ for vel_id=1:length(velocity_tas_array)
         %calculate lag proportional gain for all possible alt/vel
         %combinations
         lag_k_out_mat(vel_id,alt_id) = k_filter(a_sw,1,1, 1/sqrt(2), 3).k;
+        lag_mat_nst(vel_id,alt_id) = k_filter(a_sw,1,1, 1/sqrt(2), 3).nst_s;
     end
 end
 
@@ -55,6 +57,13 @@ ylabel('Geschwindigkeit');
 zlabel('Parameter k');
 title('Plot des Parameters k über Höhe und Geschwindigkeit');
 
+%% Show nst as mesh-plot
+figure;
+surf(alt_mesh, vel_mesh, lag_mat_nst);
+xlabel('Höhe');
+ylabel('Geschwindigkeit');
+zlabel('nst');
+title('Plot der NST über Höhe und Geschwindigkeit');
 
 %% plots for pole-zero-map and WOK
 if plots==true
