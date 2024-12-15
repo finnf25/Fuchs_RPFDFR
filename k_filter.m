@@ -9,7 +9,7 @@ function [lag] = k_filter(sw_form,p_1,p_2, D_target, omega_0_target)
     target.s = target.sigma + 1i*target.omega
 
     %pole, nst und k bestimmen
-    [offen.nst, offen.pole, offen.k] = zpkdata(sw_form.transferfunction(p_1,p_2), 'v');
+    [offen.nst, offen.pole, offen.k] = zpkdata(sw_form.transferfunction(p_1,p_2), 'v')
 
     %winkel aller bekannten Punkte zu ziel-punkt
     phase_nst = angle(target.s - offen.nst);
@@ -23,7 +23,7 @@ function [lag] = k_filter(sw_form,p_1,p_2, D_target, omega_0_target)
     %iteration um phase = (2n + 1)*pi
     lag.possible_nst_angles = [];
     for i=-10:10
-        lag.possible_nst_angles(length(lag.possible_nst_angles) + 1) = double(
+        %lag.possible_nst_angles(length(lag.possible_nst_angles) + 1) = double(
         lag.possible_nst_angles(length(lag.possible_nst_angles) + 1) = double(solve(phase_should_be_2np1pi==((2*i+1)*pi),phi_c));
     end
 

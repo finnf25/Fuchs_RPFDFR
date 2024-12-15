@@ -9,13 +9,14 @@ format long
 plots = false;
 
 %% Initial Values
-altitude_array = 15000:1000:45000;
-velocity_tas_array = 300:10:600;
+altitude_array = 10000:1000:40000;
+velocity_tas_array = 200:10:600;
 
 %output matrix for output parameter to be plotted over whole range of
 %vel/alt
 lag_k_out_mat = zeros(length(velocity_tas_array),length(altitude_array));
 lag_mat_nst = zeros(length(velocity_tas_array),length(altitude_array));
+mat_offen_k = zeros(length(velocity_tas_array),length(altitude_array));
 
 %iteration over all velocities
 for vel_id=1:length(velocity_tas_array)
@@ -36,14 +37,16 @@ for vel_id=1:length(velocity_tas_array)
         %calculate movements in different ways
         a_sw = alphaschwingung(eg);
             %b_sw = bahnschwingung(eg,enviroment);
-            %sw4x4 = laengsbewegung4x4(eg, enviroment);
+        sw4x4 = laengsbewegung4x4(eg, enviroment);
         
             %alpha_sw_p_control = proportionalrueckfuehrung(a_sw,1,1,1/sqrt(2));
         
         %calculate lag proportional gain for all possible alt/vel
         %combinations
-        lag_k_out_mat(vel_id,alt_id) = k_filter(a_sw,1,1, 1/sqrt(2), 3).k;
-        lag_mat_nst(vel_id,alt_id) = k_filter(a_sw,1,1, 1/sqrt(2), 3).nst_s;
+        
+            %lag_k_out_mat(vel_id,alt_id) = k_filter(a_sw,1,1, 1/sqrt(2), 3).k;
+            %lag_mat_nst(vel_id,alt_id) = k_filter(a_sw,1,1, 1/sqrt(2), 3).nst_s;
+        [var1, var2, mat_offen_k(vel_id,alt_id)] = zpkdata(sw4x4.tf_q_eta, 'v')
     end
 end
 
@@ -64,6 +67,14 @@ xlabel('Höhe');
 ylabel('Geschwindigkeit');
 zlabel('nst');
 title('Plot der NST über Höhe und Geschwindigkeit');
+
+%% Show nst as mesh-plot
+figure;
+surf(alt_mesh, vel_mesh, mat_offen_k);
+xlabel('Höhe');
+ylabel('Geschwindigkeit');
+zlabel('offen k');
+title('Plot von offen k über Höhe und Geschwindigkeit');
 
 %% plots for pole-zero-map and WOK
 if plots==true
